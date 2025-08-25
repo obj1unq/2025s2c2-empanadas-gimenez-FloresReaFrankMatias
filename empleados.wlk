@@ -10,6 +10,7 @@ object galvan {
     method cambiarSueldo(_sueldo) {
       sueldo = _sueldo
     }
+   
     method gastar(montoAGastar) {
       if (dinero < montoAGastar){
         deuda = deuda + (dinero - montoAGastar)
@@ -20,13 +21,17 @@ object galvan {
       }
     }
     method deuda() {
-      deuda = deuda - self.sueldo()
+      return deuda 
     }  
+    method deudaAcumulada() {
+      deuda = deuda - self.sueldo()
+    }
     method cobrarSueldo(){
-      if ((sueldo - deuda) <0 ){
+      const  balanceFinanciero = sueldo - deuda
+      if (balanceFinanciero < 0 ){
         deuda = deuda -sueldo   
       }else{
-        dinero = dinero + (sueldo + deuda)
+        dinero = dinero + balanceFinanciero
         deuda = 0
       }
     }
@@ -39,7 +44,7 @@ object galvan {
 object baigorria {
   
     var cantEmpanadasVendidas = 0
-    var costoEmpanada = 15
+    const costoEmpanada = 15
     var  montoCobrado  = 0  
     method sueldo(){
 
@@ -52,6 +57,9 @@ object baigorria {
 
     method totalCobrado() {
       montoCobrado = montoCobrado + self.sueldo()
+      self.reseteoEmpanadas()
+    }
+    method reseteoEmpanadas() {
       cantEmpanadasVendidas = 0
     }
 }
