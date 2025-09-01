@@ -24,7 +24,7 @@ object galvan {
       return deuda 
     }  
     method deudaAcumulada() {
-      deuda = deuda - self.sueldo()
+      deuda = deuda + self.sueldo()
     }
     method cobrarSueldo(){
       const  balanceFinanciero = sueldo - deuda
@@ -60,9 +60,9 @@ object baigorria {
     method reseteoEmpanadas() {
       cantEmpanadasVendidas = 0
     }
-    method cobrarsueldo(){
+    method cobrarSueldo(){
        montoCobrado = montoCobrado + self.sueldo()
-      self.reseteoEmpanadas()
+      
     }
 }
 
@@ -72,9 +72,9 @@ object gimenez {
     return dinero
     
   }
-  method pagarSueldoA(_empleado) {
-    dinero = dinero - _empleado.sueldo()
-    _empleado.cobrarSueldo()
+  method pagarSueldoA(empleado) {
+    dinero = dinero - empleado.sueldo()
+    empleado.cobrarSueldo()
   }
 }
 
