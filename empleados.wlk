@@ -13,7 +13,7 @@ object galvan {
    
     method gastar(montoAGastar) {
       if (dinero < montoAGastar){
-        deuda = deuda + (dinero - montoAGastar)
+        deuda = deuda + (  montoAGastar dinero)
         dinero = 0
       }
       else{
