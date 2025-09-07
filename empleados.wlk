@@ -13,7 +13,7 @@ object galvan {
    
     method gastar(montoAGastar) {
       if (dinero < montoAGastar){
-        deuda = deuda + (  montoAGastar dinero)
+        deuda = deuda + (  montoAGastar - dinero)
         dinero = 0
       }
       else{
@@ -29,10 +29,12 @@ object galvan {
     method cobrarSueldo(){
       const  balanceFinanciero = sueldo - deuda
       if (balanceFinanciero < 0 ){
-        deuda = deuda -sueldo   
+        deuda = deuda -sueldo
+        gimenez.descontarSueldo(sueldo)   
       }else{
         dinero = dinero + balanceFinanciero
         deuda = 0
+        gimenez.descontarSueldo(sueldo)
       }
     }
     method dinero() {
@@ -62,19 +64,24 @@ object baigorria {
     }
     method cobrarSueldo(){
        montoCobrado = montoCobrado + self.sueldo()
-      
+      gimenez.descontarSueldo(self.sueldo())
     }
 }
 
 object gimenez {
-  var dinero = 300000
-  method fondo() {
-    return dinero
-    
-  }
+  var property fondo = 300000
+
   method pagarSueldoA(empleado) {
-    dinero = dinero - empleado.sueldo()
+    self.validarSueldoDe(empleado)
     empleado.cobrarSueldo()
+  }
+   method validarSueldoDe(empleado){
+      if (fondo < empleado.sueldo()) {
+          self.error("No tiene suficientes fondos para pagar el sueldo del empleado")
+        }
+    }
+  method descontarSueldo(monto) {
+    fondo = fondo - monto
   }
 }
 

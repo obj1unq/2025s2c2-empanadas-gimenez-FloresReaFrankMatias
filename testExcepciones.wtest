@@ -1,0 +1,17 @@
+import empleados.*
+
+describe "test de gimenez" {
+    test "Gimenez no tiene suficiente fondos para pagar sueldo" {
+        galvan.cambiarSueldo(350000)
+        galvan.cobrarSueldo()
+        assert.throwsException({gimenez.pagarSueldoA(galvan)})
+    }
+
+    test "Gimenez no puede pagar sueldo de baigorria" {
+        baigorria.vender(5000)
+        assert.equals(75000, baigorria.sueldo())  
+        gimenez.fondo(70000)
+        assert.throwsException({gimenez.pagarSueldoA(baigorria)})
+
+    }
+}
